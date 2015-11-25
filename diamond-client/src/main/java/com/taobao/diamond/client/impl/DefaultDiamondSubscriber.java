@@ -9,43 +9,7 @@
  */
 package com.taobao.diamond.client.impl;
 
-import static com.taobao.diamond.common.Constants.LINE_SEPARATOR;
-import static com.taobao.diamond.common.Constants.WORD_SEPARATOR;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URLDecoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.zip.GZIPInputStream;
-
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HostConfiguration;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
-import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import com.taobao.diamond.client.BatchHttpResult;
 import com.taobao.diamond.client.DiamondConfigure;
 import com.taobao.diamond.client.DiamondSubscriber;
 import com.taobao.diamond.client.SubscriberListener;
@@ -55,10 +19,39 @@ import com.taobao.diamond.client.processor.SnapshotConfigInfoProcessor;
 import com.taobao.diamond.common.Constants;
 import com.taobao.diamond.configinfo.CacheData;
 import com.taobao.diamond.configinfo.ConfigureInfomation;
+import com.taobao.diamond.domain.ConfigInfoEx;
 import com.taobao.diamond.md5.MD5;
 import com.taobao.diamond.mockserver.MockServer;
+import com.taobao.diamond.utils.JSONUtils;
 import com.taobao.diamond.utils.LoggerInit;
 import com.taobao.diamond.utils.SimpleCache;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.codehaus.jackson.type.TypeReference;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.zip.GZIPInputStream;
+
+import static com.taobao.diamond.common.Constants.LINE_SEPARATOR;
+import static com.taobao.diamond.common.Constants.WORD_SEPARATOR;
 
 
 /**
@@ -87,7 +80,7 @@ class DefaultDiamondSubscriber implements DiamondSubscriber {
         try {
             LoggerInit.initLogFromBizLog();
         }
-        catch (Throwable _) {
+        catch (Throwable t) {
         }
     }
     private final Log dataLog = LogFactory.getLog(LoggerInit.LOG_NAME_CONFIG_DATA);
@@ -259,7 +252,7 @@ class DefaultDiamondSubscriber implements DiamondSubscriber {
     /**
      * 向DiamondServer请求dataId对应的配置信息，并将结果抛给客户的监听器
      * 
-     * @param dataId
+     * @param cacheData
      */
     private void receiveConfigInfo(final CacheData cacheData) {
         scheduledExecutor.execute(new Runnable() {
@@ -889,7 +882,6 @@ class DefaultDiamondSubscriber implements DiamondSubscriber {
     /**
      * 获取探测更新的DataID的请求字符串
      * 
-     * @param localModifySet
      * @return
      */
     private String getProbeUpdateString() {
@@ -1260,4 +1252,94 @@ class DefaultDiamondSubscriber implements DiamondSubscriber {
         // TODO 哪些值可以在运行时动态更新?
     }
 
+    @Override
+    public BatchHttpResult getConfigureInfomationBatch(List<String> dataIds, String group, int timeout) {
+        // 判断list是否为null
+        if (dataIds == null) {
+            log.error("dataId list cannot be null,group=" + group);
+            return new BatchHttpResult(HttpStatus.SC_BAD_REQUEST);
+        }
+        if (group == null) {
+            group = Constants.DEFAULT_GROUP;
+        }
+
+        // 将dataId的list处理为用一个不可见字符分隔的字符串
+        StringBuilder dataIdBuilder = new StringBuilder();
+        for (String dataId : dataIds) {
+            dataIdBuilder.append(dataId).append(Constants.LINE_SEPARATOR);
+        }
+        String dataIdStr = dataIdBuilder.toString();
+
+        // 构造HTTP method
+        PostMethod post = new PostMethod(Constants.HTTP_URI_FILE_BATCH);
+        // 设置请求超时时间
+        post.getParams().setParameter(HttpMethodParams.SO_TIMEOUT, timeout);
+
+        BatchHttpResult response = null;
+        try {
+            // 设置参数
+            NameValuePair dataIdValue = new NameValuePair("dataIds", dataIdStr);
+            NameValuePair groupValue = new NameValuePair("group", group);
+
+            post.setRequestBody(new NameValuePair[] { dataIdValue, groupValue });
+
+            httpClient.getHostConfiguration()
+                    .setHost(diamondConfigure.getDomainNameList().get(this.domainNamePos.get()),
+                            this.diamondConfigure.getPort());
+            // 执行方法并返回http状态码
+            int status = httpClient.executeMethod(post);
+            String responseMsg = post.getResponseBodyAsString();
+
+            if (status == HttpStatus.SC_OK) {
+                String json = null;
+                try {
+                    json = responseMsg;
+
+                    List<ConfigInfoEx> configInfoExList = new LinkedList<ConfigInfoEx>();
+                    Object resultObj = JSONUtils.deserializeObject(json, new TypeReference<List<ConfigInfoEx>>() {
+                    });
+                    if (!(resultObj instanceof List<?>)) {
+                        throw new RuntimeException("batch query deserialize type error, not list, json=" + json);
+                    }
+                    List<ConfigInfoEx> resultList = (List<ConfigInfoEx>) resultObj;
+                    for (ConfigInfoEx configInfoEx : resultList) {
+                        configInfoExList.add(configInfoEx);
+                    }
+
+                    // 反序列化成功, 本次批量查询成功
+                    response = new BatchHttpResult(configInfoExList);
+                    log.info("batch query success,dataIds=" + dataIdStr + ",group="
+                            + group + ",json=" + json);
+                }
+                catch (Exception e) {
+                    response = new BatchHttpResult(Constants.BATCH_OP_ERROR);
+                    log.error("batch query deserialize error,dataIdStr=" + dataIdStr
+                            + ",group=" + group + ",json=" + json, e);
+                }
+
+            }
+            else if (status == HttpStatus.SC_REQUEST_TIMEOUT) {
+                response = new BatchHttpResult(HttpStatus.SC_REQUEST_TIMEOUT);
+                log.error("batch query timeout, socket timeout(ms):" + timeout + ",dataIds=" + dataIdStr + ",group=" + group);
+            }
+            else {
+                response = new BatchHttpResult(status);
+                log.error("batch query fail, status:" + status + ", response:" + responseMsg + ",dataIds=" + dataIdStr + ",group=" + group);
+            }
+        }
+        catch (HttpException e) {
+            response = new BatchHttpResult(Constants.BATCH_HTTP_EXCEPTION);
+            log.error("batch query http exception,dataIds=" + dataIdStr + ",group=" + group, e);
+        }
+        catch (IOException e) {
+            response = new BatchHttpResult(Constants.BATCH_IO_EXCEPTION);
+            log.error("batch query io exception, dataIds=" + dataIdStr + ",group=" + group, e);
+        }
+        finally {
+            // 释放连接资源
+            post.releaseConnection();
+        }
+
+        return response;
+    }
 }

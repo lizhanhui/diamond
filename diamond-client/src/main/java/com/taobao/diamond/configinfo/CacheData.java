@@ -9,10 +9,10 @@
  */
 package com.taobao.diamond.configinfo;
 
+import com.taobao.diamond.common.Constants;
+
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
-
-import com.taobao.diamond.common.Constants;
 
 
 public class CacheData {

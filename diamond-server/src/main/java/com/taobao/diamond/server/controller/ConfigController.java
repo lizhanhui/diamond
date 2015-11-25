@@ -9,34 +9,39 @@
  */
 package com.taobao.diamond.server.controller;
 
-import static com.taobao.diamond.common.Constants.LINE_SEPARATOR;
-import static com.taobao.diamond.common.Constants.WORD_SEPARATOR;
-
-import java.net.URLEncoder;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
 import com.taobao.diamond.common.Constants;
+import com.taobao.diamond.domain.ConfigInfo;
+import com.taobao.diamond.domain.ConfigInfoEx;
 import com.taobao.diamond.server.service.ConfigService;
 import com.taobao.diamond.server.service.DiskService;
 import com.taobao.diamond.server.utils.GlobalCounter;
+import com.taobao.diamond.utils.JSONUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import static com.taobao.diamond.common.Constants.LINE_SEPARATOR;
+import static com.taobao.diamond.common.Constants.WORD_SEPARATOR;
 
 
 /**
- * ´¦ÀíÅäÖÃĞÅÏ¢»ñÈ¡ºÍÌá½»µÄcontroller
- * 
+ *
  * @author boyan
  * @date 2010-5-4
  */
 @Controller
 public class ConfigController {
+
+    private static final Log log = LogFactory.getLog(ConfigController.class);
 
     @Autowired
     private ConfigService configService;
@@ -44,12 +49,10 @@ public class ConfigController {
     @Autowired
     private DiskService diskService;
 
-
     public String getConfig(HttpServletRequest request, HttpServletResponse response, String dataId, String group) {
         response.setHeader("Content-Type", "text/html;charset=GBK");
         final String address = getRemortIP(request);
         if (address == null) {
-            // Î´ÕÒµ½Ô¶¶ËµØÖ·£¬·µ»Ø400´íÎó
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return "400";
         }
@@ -66,18 +69,15 @@ public class ConfigController {
 
         response.setHeader(Constants.CONTENT_MD5, md5);
 
-        // ÕıÔÚ±»ĞŞ¸Ä£¬·µ»Ø304£¬ÕâÀïµÄ¼ì²é²¢Ã»ÓĞ°ì·¨±£Ö¤Ò»ÖÂĞÔ£¬Òò´Ë×ödouble-check¾¡Á¦±£Ö¤
         if (diskService.isModified(dataId, group)) {
             response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
             return "304";
         }
         String path = configService.getConfigInfoPath(dataId, group);
-        // ÔÙ´Î¼ì²é
         if (diskService.isModified(dataId, group)) {
             response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
             return "304";
         }
-        // ½ûÓÃ»º´æ
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
         response.setHeader("Cache-Control", "no-cache,no-store");
@@ -89,7 +89,6 @@ public class ConfigController {
         response.setHeader("Content-Type", "text/html;charset=GBK");
         final String address = getRemortIP(request);
         if (address == null) {
-            // Î´ÕÒµ½Ô¶¶ËµØÖ·£¬·µ»Ø400´íÎó
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return "400";
         }
@@ -119,13 +118,77 @@ public class ConfigController {
         }
 
         request.setAttribute("content", returnHeader);
-        // ½ûÓÃ»º´æ
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
         response.setHeader("Cache-Control", "no-cache,no-store");
         return "200";
     }
 
+    public String batchQuery(HttpServletRequest request, HttpServletResponse response) { // TODO: performance tuning
+        String group = request.getParameter("group");
+        String dataIds = request.getParameter("dataIds");
+
+        response.setCharacterEncoding("UTF-8");
+
+        // è¿™é‡ŒæŠ›å‡ºçš„å¼‚å¸¸, ä¼šäº§ç”Ÿä¸€ä¸ª500é”™è¯¯, è¿”å›ç»™sdk, sdkä¼šå°†500é”™è¯¯è®°å½•åˆ°æ—¥å¿—ä¸­
+        if (StringUtils.isBlank(dataIds)) {
+            throw new IllegalArgumentException("æ‰¹é‡æŸ¥è¯¢, dataIdsä¸èƒ½ä¸ºç©º");
+        }
+        // groupå¯¹æ‰¹é‡æ“ä½œçš„æ¯ä¸€æ¡æ•°æ®éƒ½ç›¸åŒ, ä¸éœ€è¦åœ¨forå¾ªç¯é‡Œé¢è¿›è¡Œåˆ¤æ–­
+        if (StringUtils.isBlank(group)) {
+            throw new IllegalArgumentException("æ‰¹é‡æŸ¥è¯¢, groupä¸èƒ½ä¸ºç©ºæˆ–è€…åŒ…å«éæ³•å­—ç¬¦");
+        }
+
+        // åˆ†è§£dataId
+        String[] dataIdArray = dataIds.split(Constants.LINE_SEPARATOR);
+        group = group.trim();
+
+        List<ConfigInfoEx> configInfoExList = new ArrayList<ConfigInfoEx>();
+        for (String dataId : dataIdArray) {
+            ConfigInfoEx configInfoEx = new ConfigInfoEx();
+            configInfoEx.setDataId(dataId);
+            configInfoEx.setGroup(group);
+            configInfoExList.add(configInfoEx);
+            try {
+                if (StringUtils.isBlank(dataId)) {
+                    configInfoEx.setStatus(Constants.BATCH_QUERY_NONEXISTS);
+                    configInfoEx.setMessage("dataId is blank");
+                    continue;
+                }
+
+                // æŸ¥è¯¢æ•°æ®åº“
+                ConfigInfo configInfo = this.configService.findConfigInfo(dataId, group);
+                if (configInfo == null) {
+                    // æ²¡æœ‰å¼‚å¸¸, è¯´æ˜æŸ¥è¯¢æˆåŠŸ, ä½†æ•°æ®ä¸å­˜åœ¨, è®¾ç½®ä¸å­˜åœ¨çš„çŠ¶æ€ç 
+                    configInfoEx.setStatus(Constants.BATCH_QUERY_NONEXISTS);
+                    configInfoEx.setMessage("query data does not exist");
+                }
+                else {
+                    // æ²¡æœ‰å¼‚å¸¸, è¯´æ˜æŸ¥è¯¢æˆåŠŸ, è€Œä¸”æ•°æ®å­˜åœ¨, è®¾ç½®å­˜åœ¨çš„çŠ¶æ€ç 
+                    String content = configInfo.getContent();
+                    configInfoEx.setContent(content);
+                    configInfoEx.setStatus(Constants.BATCH_QUERY_EXISTS);
+                    configInfoEx.setMessage("query success");
+                }
+            }
+            catch (Exception e) {
+                log.error("æ‰¹é‡æŸ¥è¯¢, åœ¨æŸ¥è¯¢è¿™ä¸ªdataIdæ—¶å‡ºé”™, dataId=" + dataId + ",group=" + group, e);
+                // å‡ºç°å¼‚å¸¸, è®¾ç½®å¼‚å¸¸çŠ¶æ€ç 
+                configInfoEx.setStatus(Constants.BATCH_OP_ERROR);
+                configInfoEx.setMessage("query error: " + e.getMessage());
+            }
+        }
+
+        String json = null;
+        try {
+            json = JSONUtils.serializeObject(configInfoExList);
+        }
+        catch (Exception e) {
+            log.error("æ‰¹é‡æŸ¥è¯¢ç»“æœåºåˆ—åŒ–å‡ºé”™, json=" + json, e);
+        }
+
+        return json;
+    }
 
     public ConfigService getConfigService() {
         return configService;
@@ -148,8 +211,7 @@ public class ConfigController {
 
 
     /**
-     * ²éÕÒÕæÊµµÄIPµØÖ·
-     * 
+     *
      * @param request
      * @return
      */

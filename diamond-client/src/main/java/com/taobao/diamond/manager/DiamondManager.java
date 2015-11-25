@@ -9,14 +9,14 @@
  */
 package com.taobao.diamond.manager;
 
+import com.taobao.diamond.client.DiamondConfigure;
+
 import java.util.List;
 import java.util.Properties;
 
-import com.taobao.diamond.client.DiamondConfigure;
-
 
 /**
- * DiamondManagerÓÃÓÚ¶©ÔÄÒ»¸öÇÒ½öÓĞÒ»¸öDataID¶ÔÓ¦µÄÅäÖÃĞÅÏ¢
+ * DiamondManagerï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ò½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½DataIDï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
  * 
  * @author aoqiong
  * 
@@ -24,7 +24,7 @@ import com.taobao.diamond.client.DiamondConfigure;
 public interface DiamondManager {
 
     /**
-     * ÉèÖÃManagerListener£¬Ã¿µ±ÊÕµ½Ò»¸öDataID¶ÔÓ¦µÄÅäÖÃĞÅÏ¢£¬Ôò¿Í»§ÉèÖÃµÄManagerListener»á½ÓÊÕµ½Õâ¸öÅäÖÃĞÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½ManagerListenerï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Õµï¿½Ò»ï¿½ï¿½DataIDï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½Ãµï¿½ManagerListenerï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      * 
      * @param managerListener
      */
@@ -32,8 +32,8 @@ public interface DiamondManager {
 
 
     /**
-     * ÉèÖÃDataID¶ÔÓ¦µÄ¶à¸öManagerListener£¬Ã¿µ±ÊÕµ½Ò»¸öDataID¶ÔÓ¦µÄÅäÖÃĞÅÏ¢£¬
-     * Ôò¿Í»§ÉèÖÃµÄ¶à¸öManagerListener»á½ÓÊÕµ½Õâ¸öÅäÖÃĞÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½DataIDï¿½ï¿½Ó¦ï¿½Ä¶ï¿½ï¿½ManagerListenerï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Õµï¿½Ò»ï¿½ï¿½DataIDï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
+     * ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ÃµÄ¶ï¿½ï¿½ManagerListenerï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      * 
      * @param managerListenerList
      */
@@ -41,7 +41,7 @@ public interface DiamondManager {
 
 
     /**
-     * ·µ»Ø¸ÃDiamondManagerÉèÖÃµÄlistenerÁĞ±í
+     * ï¿½ï¿½ï¿½Ø¸ï¿½DiamondManagerï¿½ï¿½ï¿½Ãµï¿½listenerï¿½Ğ±ï¿½
      * 
      * @return
      */
@@ -49,34 +49,34 @@ public interface DiamondManager {
 
 
     /**
-     * Í¬²½»ñÈ¡ÅäÖÃĞÅÏ¢,,´Ë·½·¨ÓÅÏÈ´Ó${user.home
-     * }/diamond/data/config-data/${group}/${dataId}ÏÂ»ñÈ¡ÅäÖÃÎÄ¼ş£¬Èç¹ûÃ»ÓĞ£¬Ôò´Ódiamond
-     * server»ñÈ¡ÅäÖÃĞÅÏ¢
+     * Í¬ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢,,ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½${user.home
+     * }/diamond/data/config-data/${group}/${dataId}ï¿½Â»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½diamond
+     * serverï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      * 
      * @param timeout
-     *            ´ÓÍøÂç»ñÈ¡ÅäÖÃĞÅÏ¢µÄ³¬Ê±£¬µ¥Î»ºÁÃë
+     *            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ä³ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
      * @return
      */
     public String getConfigureInfomation(long timeout);
 
 
     /**
-     * Í¬²½»ñÈ¡Ò»·İÓĞĞ§µÄÅäÖÃĞÅÏ¢£¬°´ÕÕ<strong>±¾µØÎÄ¼ş->diamond·şÎñÆ÷->ÉÏÒ»´ÎÕıÈ·ÅäÖÃµÄsnapshot</strong>
-     * µÄÓÅÏÈË³Ğò»ñÈ¡£¬ Èç¹ûÕâĞ©Í¾¾¶¶¼ÎŞĞ§£¬Ôò·µ»Ønull
+     * Í¬ï¿½ï¿½ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<strong>ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½->diamondï¿½ï¿½ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ãµï¿½snapshot</strong>
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½È¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ğ©Í¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½ï¿½ò·µ»ï¿½null
      * 
      * @param timeout
-     *            ´ÓÍøÂç»ñÈ¡ÅäÖÃĞÅÏ¢µÄ³¬Ê±£¬µ¥Î»ºÁÃë
+     *            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ä³ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
      * @return
      */
     public String getAvailableConfigureInfomation(long timeout);
 
 
     /**
-     * Í¬²½»ñÈ¡Ò»·İÓĞĞ§µÄÅäÖÃĞÅÏ¢£¬°´ÕÕ<strong>ÉÏÒ»´ÎÕıÈ·ÅäÖÃµÄsnapshot->±¾µØÎÄ¼ş->diamond·şÎñÆ÷</strong>
-     * µÄÓÅÏÈË³Ğò»ñÈ¡£¬ Èç¹ûÕâĞ©Í¾¾¶¶¼ÎŞĞ§£¬Ôò·µ»Ønull
+     * Í¬ï¿½ï¿½ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<strong>ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ãµï¿½snapshot->ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½->diamondï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</strong>
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½È¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ğ©Í¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½ï¿½ò·µ»ï¿½null
      * 
      * @param timeout
-     *            ´ÓÍøÂç»ñÈ¡ÅäÖÃĞÅÏ¢µÄ³¬Ê±£¬µ¥Î»ºÁÃë
+     *            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ä³ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
      * @return
      */
 
@@ -84,17 +84,17 @@ public interface DiamondManager {
 
 
     /**
-     * Í¬²½»ñÈ¡Properties¸ñÊ½µÄÅäÖÃĞÅÏ¢
+     * Í¬ï¿½ï¿½ï¿½ï¿½È¡Propertiesï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      * 
      * @param timeout
-     *            µ¥Î»£ººÁÃë
+     *            ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * @return
      */
     public Properties getPropertiesConfigureInfomation(long timeout);
 
 
     /**
-     * Í¬²½»ñÈ¡Properties¸ñÊ½µÄÅäÖÃĞÅÏ¢£¬±¾µØsnapshotÓÅÏÈ
+     * Í¬ï¿½ï¿½ï¿½ï¿½È¡Propertiesï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½snapshotï¿½ï¿½ï¿½ï¿½
      * 
      * @param timeout
      * @return
@@ -103,18 +103,18 @@ public interface DiamondManager {
 
 
     /**
-     * Í¬²½»ñÈ¡Ò»·İÓĞĞ§µÄPropertiesÅäÖÃĞÅÏ¢£¬°´ÕÕ<strong>±¾µØÎÄ¼ş->diamond·şÎñÆ÷->ÉÏÒ»´ÎÕıÈ·ÅäÖÃµÄsnapshot</
-     * strong> µÄÓÅÏÈË³Ğò»ñÈ¡£¬ Èç¹ûÕâĞ©Í¾¾¶¶¼ÎŞĞ§£¬Ôò·µ»Ønull
+     * Í¬ï¿½ï¿½ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½Propertiesï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<strong>ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½->diamondï¿½ï¿½ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ãµï¿½snapshot</
+     * strong> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½È¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ğ©Í¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½ï¿½ò·µ»ï¿½null
      * 
      * @param timeout
-     *            µ¥Î»£ººÁÃë
+     *            ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * @return
      */
     public Properties getAvailablePropertiesConfigureInfomation(long timeout);
 
 
     /**
-     * ÉèÖÃDiamondConfigure£¬Ò»¸öJVMÖĞËùÓĞµÄDiamondManager¶ÔÓ¦ÕâÒ»¸öDiamondConfigure
+     * ï¿½ï¿½ï¿½ï¿½DiamondConfigureï¿½ï¿½Ò»ï¿½ï¿½JVMï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½DiamondManagerï¿½ï¿½Ó¦ï¿½ï¿½Ò»ï¿½ï¿½DiamondConfigure
      * 
      * @param diamondConfigure
      */
@@ -122,7 +122,7 @@ public interface DiamondManager {
 
 
     /**
-     * »ñÈ¡DiamondConfigure£¬Ò»¸öJVMÖĞËùÓĞµÄDiamondManager¶ÔÓ¦ÕâÒ»¸öDiamondConfigure
+     * ï¿½ï¿½È¡DiamondConfigureï¿½ï¿½Ò»ï¿½ï¿½JVMï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½DiamondManagerï¿½ï¿½Ó¦ï¿½ï¿½Ò»ï¿½ï¿½DiamondConfigure
      * 
      * @param diamondConfigure
      */
@@ -130,7 +130,7 @@ public interface DiamondManager {
 
 
     /**
-     * ¹Ø±ÕÕâ¸öDiamondManager
+     * ï¿½Ø±ï¿½ï¿½ï¿½ï¿½DiamondManager
      */
     public void close();
 

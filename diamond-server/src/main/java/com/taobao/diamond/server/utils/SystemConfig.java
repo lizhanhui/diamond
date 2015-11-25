@@ -9,17 +9,16 @@
  */
 package com.taobao.diamond.server.utils;
 
+import com.taobao.diamond.utils.ResourceUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
 import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.taobao.diamond.utils.ResourceUtils;
 
 
 public class SystemConfig {

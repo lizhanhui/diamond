@@ -9,14 +9,14 @@
  */
 package com.taobao.diamond.utils;
 
+import com.taobao.diamond.common.Constants;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import com.taobao.diamond.common.Constants;
-
 
 /**
- * 一个带TTL的简单Cache，对于过期的entry没有清理
+ * 一锟斤拷锟斤拷TTL锟侥硷拷Cache锟斤拷锟斤拷锟节癸拷锟节碉拷entry没锟斤拷锟斤拷锟斤拷
  * 
  * @author fenghan
  * 

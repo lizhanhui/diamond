@@ -9,13 +9,13 @@
  */
 package com.taobao.diamond.client;
 
+import com.taobao.diamond.common.Constants;
+import com.taobao.diamond.mockserver.MockServer;
+
 import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.taobao.diamond.common.Constants;
-import com.taobao.diamond.mockserver.MockServer;
 
 
 /**

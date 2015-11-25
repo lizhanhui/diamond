@@ -9,15 +9,14 @@
  */
 package com.taobao.diamond.manager.impl;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.Properties;
-
+import com.taobao.diamond.manager.ManagerListenerAdapter;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.taobao.diamond.manager.ManagerListenerAdapter;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.Properties;
 
 
 public abstract class PropertiesListener extends ManagerListenerAdapter {
@@ -27,7 +26,7 @@ public abstract class PropertiesListener extends ManagerListenerAdapter {
 
     public void receiveConfigInfo(String configInfo) {
         if (StringUtils.isEmpty(configInfo)) {
-            log.warn("ÊÕµ½µÄÅäÖÃÐÅÏ¢Îª¿Õ");
+            log.warn("ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Îªï¿½ï¿½");
             return;
         }
 
@@ -37,7 +36,7 @@ public abstract class PropertiesListener extends ManagerListenerAdapter {
             innerReceive(properties);
         }
         catch (IOException e) {
-            log.warn("×°ÔØpropertiesÊ§°Ü£º" + configInfo, e);
+            log.warn("×°ï¿½ï¿½propertiesÊ§ï¿½Ü£ï¿½" + configInfo, e);
         }
 
     }

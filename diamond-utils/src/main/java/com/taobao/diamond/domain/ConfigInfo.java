@@ -9,10 +9,10 @@
  */
 package com.taobao.diamond.domain;
 
+import com.taobao.diamond.md5.MD5;
+
 import java.io.PrintWriter;
 import java.io.Serializable;
-
-import com.taobao.diamond.md5.MD5;
 
 
 /**

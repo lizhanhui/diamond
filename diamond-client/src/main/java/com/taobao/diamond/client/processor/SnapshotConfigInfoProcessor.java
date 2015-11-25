@@ -9,18 +9,10 @@
  */
 package com.taobao.diamond.client.processor;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-
+import com.taobao.diamond.common.Constants;
 import org.apache.commons.lang.StringUtils;
 
-import com.taobao.diamond.common.Constants;
+import java.io.*;
 
 
 public class SnapshotConfigInfoProcessor {
@@ -149,14 +141,14 @@ public class SnapshotConfigInfoProcessor {
 
     private File getTargetFile(String dataId, String group) throws IOException {
         String path = dir + File.separator + group;
-        createDirIfNessary(path);
+        createDirIfNecessary(path);
         String filePath = path + File.separator + dataId;
         File file = createFileIfNessary(filePath);
         return file;
     }
 
 
-    private void createDirIfNessary(String path) {
+    private void createDirIfNecessary(String path) {
         final File dir = new File(path);
         if (!dir.exists()) {
             dir.mkdir();

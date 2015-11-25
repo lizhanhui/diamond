@@ -9,10 +9,10 @@
  */
 package com.taobao.diamond.util;
 
+import com.taobao.diamond.domain.DiamondConf;
+
 import java.util.List;
 import java.util.Random;
-
-import com.taobao.diamond.domain.DiamondConf;
 
 
 public class RandomDiamondUtils {
@@ -28,22 +28,22 @@ public class RandomDiamondUtils {
         if(allDiamondConfs==null){
             allDiamondConfs=diamondConfs;
         }
-        //×î´ó·ÃÎÊ´ÎÊýÎªdiamondConfs.size()
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ê´ï¿½ï¿½ï¿½ÎªdiamondConfs.size()
         max_times=len;
-        //ÉèÖÃÖØÊÔ´ÎÊýÎª0
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Îª0
         retry_times=0;
-        //µ±Ç°ÏÂ±êÉèÖÃÎª0
+        //ï¿½ï¿½Ç°ï¿½Â±ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
         currentIndex=0;
-        //³õÊ¼»¯ÏÂ±êÊý×é
+        //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Â±ï¿½ï¿½ï¿½ï¿½ï¿½
         randomIndexSequence=new int[len];
-        //¸³Öµ
+        //ï¿½ï¿½Öµ
         for(int i=0;i<len;i++){
             randomIndexSequence[i]=i;
         }
-        // 1.³¤¶ÈÎª£±Ö±½Ó·µ»Ø
+        // 1.ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½ï¿½
         if(len==1)
             return;
-        // 2.³¤¶ÈÎª£²,50%µÄ¸ÅÂÊ»»Ò»ÏÂ
+        // 2.ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½,50%ï¿½Ä¸ï¿½ï¿½Ê»ï¿½Ò»ï¿½ï¿½
         Random random=new Random();
         if(len==2 && random.nextInt(2)==1) 
         {
@@ -52,11 +52,11 @@ public class RandomDiamondUtils {
            randomIndexSequence[1]=temp;
            return;
         }
-        // 3.Ëæ»ú²úÉúÒ»¸ö0~n-2µÄÏÂ±ê,²¢½«´ËÏÂ±êµÄÖµÓëÊý×é×îºóÒ»¸öÔªËØ½»»»,½øÐÐ2n´Î
+        // 3.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½0~n-2ï¿½ï¿½ï¿½Â±ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½Ø½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½2nï¿½ï¿½
         int times=2 * len;
         for(int j=0;j<times;j++){
             int selectedIndex=random.nextInt(len-1);
-            //½«Ëæ»ú²úÉúÏÂ±êµÄÖµÓë×îºóÒ»¸öÔªËØÖµ½»»»
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
             int temp=randomIndexSequence[selectedIndex];
             randomIndexSequence[selectedIndex]=randomIndexSequence[len-1];
             randomIndexSequence[len-1]=temp;
@@ -72,16 +72,16 @@ public class RandomDiamondUtils {
         return max_times;
     }
     /**
-     * Ëæ»úÈ¡µÃÒ»¸ödiamondServerÅäÖÃ¶ÔÏó
+     * ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ò»ï¿½ï¿½diamondServerï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½
      * 
      * @param diamondConfs
-     * @return DiamondConf diamondServerÅäÖÃ¶ÔÏó
+     * @return DiamondConf diamondServerï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½
      */
     public DiamondConf generatorOneDiamondConf(){
         DiamondConf diamondConf=null;
-        //·ÃÎÊÏÂ±êÐ¡ÓÚ×îºóÒ»¸öÏÂ±ê
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Â±ï¿½
         if(retry_times < max_times){
-            //µÃµ½µ±Ç°·ÃÎÊÏÂ±ê
+            //ï¿½Ãµï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½
             currentIndex=randomIndexSequence[retry_times];
             diamondConf = allDiamondConfs.get(currentIndex);
         }

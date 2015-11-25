@@ -15,11 +15,11 @@ public class Constants {
     
     public static final String BASE_DIR = "config-data";
 
-    public static final String DEFAULT_DOMAINNAME = "a.b.c";
+    public static final String DEFAULT_DOMAINNAME = "localhost";
 
-    public static final String DAILY_DOMAINNAME = "d.e.f";
+    public static final String DAILY_DOMAINNAME = "localhost";
 
-    public static final int DEFAULT_PORT = 0;
+    public static final int DEFAULT_PORT = 8080;
 
     public static final String NULL = "";
 
@@ -53,7 +53,9 @@ public class Constants {
 
     public static final int RECV_WAIT_TIMEOUT = ONCE_TIMEOUT * 5;// 毫秒
 
-    public static final String HTTP_URI_FILE = "/url";
+    public static final String HTTP_URI_FILE = "/config.co";
+
+    public static final String HTTP_URI_FILE_BATCH = "/configBatch.co";
 
     public static final String CONFIG_HTTP_URI_FILE = "/url";
 
@@ -82,5 +84,11 @@ public class Constants {
     public static final int BATCH_ADD_SUCCESS = 3;
     // 更新成功
     public static final int BATCH_UPDATE_SUCCESS = 4;
+    // HTTP请求失败
+    public static final int BATCH_HTTP_EXCEPTION = 5;
+    // HTTP IOException
+    public static final int BATCH_IO_EXCEPTION = 6;
 
+    public static final int GETCONFIG_LOCAL_SERVER_SNAPSHOT = 1;
+    public static final int GETCONFIG_SNAPSHOT_LOCAL_SERVER = 2;
 }

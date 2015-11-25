@@ -9,16 +9,15 @@
  */
 package com.taobao.diamond.md5;
 
+import com.taobao.diamond.common.Constants;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.taobao.diamond.common.Constants;
 
 
 public class MD5 {
@@ -69,7 +68,7 @@ public class MD5 {
 
 
     /**
-     * ¶Ô×Ö·û´®½øÐÐmd5
+     * ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½md5
      * 
      * @param str
      * @return md5 byte[16]
@@ -93,7 +92,7 @@ public class MD5 {
 
 
     /**
-     * ¶Ô¶þ½øÖÆÊý¾Ý½øÐÐmd5
+     * ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½md5
      * 
      * @param str
      * @return md5 byte[16]
@@ -114,7 +113,7 @@ public class MD5 {
 
 
     /**
-     * ½«Ò»¸ö×Ö½ÚÊý×é×ª»¯Îª¿É¼ûµÄ×Ö·û´®
+     * ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªï¿½É¼ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
      * 
      * @param bt
      * @return
@@ -138,17 +137,17 @@ public class MD5 {
 
 
     /**
-     * ½«×Ö·û´®×ª»»Îªbytes
+     * ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªbytes
      * 
      * @param str
      * @return byte[]
      */
     public byte[] string2bytes(String str) {
         if (null == str) {
-            throw new NullPointerException("²ÎÊý²»ÄÜÎª¿Õ");
+            throw new NullPointerException("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½");
         }
         if (str.length() != 32) {
-            throw new IllegalArgumentException("×Ö·û´®³¤¶È±ØÐëÊÇ32");
+            throw new IllegalArgumentException("ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È±ï¿½ï¿½ï¿½ï¿½ï¿½32");
         }
         byte[] data = new byte[16];
         char[] chs = str.toCharArray();

@@ -1,12 +1,8 @@
 package com.taobao.diamond.server.service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.servlet.ServletContext;
-
+import com.taobao.diamond.common.Constants;
+import com.taobao.diamond.domain.ConfigInfo;
+import com.taobao.diamond.server.exception.ConfigServiceException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
 
-import com.taobao.diamond.common.Constants;
-import com.taobao.diamond.domain.ConfigInfo;
-import com.taobao.diamond.server.exception.ConfigServiceException;
+import javax.servlet.ServletContext;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**

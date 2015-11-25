@@ -9,28 +9,13 @@
  */
 package com.taobao.diamond.sdkapi.impl;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.zip.GZIPInputStream;
-
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.NameValuePair;
+import com.taobao.diamond.common.Constants;
+import com.taobao.diamond.domain.*;
+import com.taobao.diamond.sdkapi.DiamondSDKManager;
+import com.taobao.diamond.util.PatternUtils;
+import com.taobao.diamond.util.RandomDiamondUtils;
+import com.taobao.diamond.utils.JSONUtils;
+import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
@@ -40,19 +25,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.type.TypeReference;
 
-import com.taobao.diamond.common.Constants;
-import com.taobao.diamond.domain.BatchContextResult;
-import com.taobao.diamond.domain.ConfigInfo;
-import com.taobao.diamond.domain.ConfigInfoEx;
-import com.taobao.diamond.domain.ContextResult;
-import com.taobao.diamond.domain.DiamondConf;
-import com.taobao.diamond.domain.DiamondSDKConf;
-import com.taobao.diamond.domain.Page;
-import com.taobao.diamond.domain.PageContextResult;
-import com.taobao.diamond.sdkapi.DiamondSDKManager;
-import com.taobao.diamond.util.PatternUtils;
-import com.taobao.diamond.util.RandomDiamondUtils;
-import com.taobao.diamond.utils.JSONUtils;
+import java.io.*;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
 
 
 /**

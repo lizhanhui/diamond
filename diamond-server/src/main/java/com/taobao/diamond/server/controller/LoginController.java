@@ -9,8 +9,7 @@
  */
 package com.taobao.diamond.server.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.taobao.diamond.server.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.taobao.diamond.server.service.AdminService;
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
- * µÇÂ¼µÇ³ö¿ØÖÆÆ÷
+ * ï¿½ï¿½Â¼ï¿½Ç³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  * @author boyan
  * @date 2010-5-6
@@ -42,7 +41,7 @@ public class LoginController {
             return "admin/admin";
         }
         else {
-            modelMap.addAttribute("message", "µÇÂ¼Ê§°Ü£¬ÓÃ»§ÃûÃÜÂë²»Æ¥Åä");
+            modelMap.addAttribute("message", "ï¿½ï¿½Â¼Ê§ï¿½Ü£ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²»Æ¥ï¿½ï¿½");
             return "login";
         }
     }

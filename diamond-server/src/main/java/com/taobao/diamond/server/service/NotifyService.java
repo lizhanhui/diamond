@@ -9,6 +9,14 @@
  */
 package com.taobao.diamond.server.service;
 
+import com.taobao.diamond.server.utils.SystemConfig;
+import com.taobao.diamond.utils.ResourceUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,16 +25,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.Properties;
-
-import javax.annotation.PostConstruct;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-
-import com.taobao.diamond.server.utils.SystemConfig;
-import com.taobao.diamond.utils.ResourceUtils;
 
 
 /**

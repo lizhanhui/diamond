@@ -1,20 +1,18 @@
 package com.taobao.diamond.server.controller;
 
-import java.io.IOException;
+import com.taobao.diamond.common.Constants;
+import com.taobao.diamond.server.service.ConfigService;
+import com.taobao.diamond.server.service.DiskService;
+import org.springframework.util.StringUtils;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.util.StringUtils;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import com.taobao.diamond.common.Constants;
-import com.taobao.diamond.server.service.ConfigService;
-import com.taobao.diamond.server.service.DiskService;
+import java.io.IOException;
 
 
 public class ConfigServlet extends HttpServlet {
@@ -22,7 +20,6 @@ public class ConfigServlet extends HttpServlet {
     private static final long serialVersionUID = 4339468526746635388L;
 
     private ConfigController configController;
-
 
     @Override
     public void init() throws ServletException {
@@ -43,7 +40,7 @@ public class ConfigServlet extends HttpServlet {
 
 
     /**
-     * 查找真实的IP地址
+     * Get remote ip through proxy.
      * 
      * @param request
      * @return
@@ -68,7 +65,7 @@ public class ConfigServlet extends HttpServlet {
             IOException {
         String probeModify = request.getParameter(Constants.PROBE_MODIFY_REQUEST);
         if (!StringUtils.hasLength(probeModify))
-            throw new IOException("无效的probeModify");
+            throw new IOException("Must set probeModify");
         String page = this.configController.getProbeModifyResult(request, response, probeModify);
         forward(request, response, page, "/jsp/", ".jsp");
     }
@@ -80,7 +77,7 @@ public class ConfigServlet extends HttpServlet {
         String dataId = request.getParameter("dataId");
 
         if (!StringUtils.hasLength(dataId)) {
-            throw new IOException("无效的dataId");
+            throw new IOException("Must set dataId");
         }
 
         String page = this.configController.getConfig(request, response, dataId, group);

@@ -9,13 +9,13 @@
  */
 package com.taobao.diamond.client;
 
-import java.util.concurrent.Executor;
-
 import com.taobao.diamond.configinfo.ConfigureInfomation;
+
+import java.util.concurrent.Executor;
 
 
 /**
- * Diamond¶©ÔÄÕßµÄÅäÖÃĞÅÏ¢¼àÌıÆ÷
+ * Diamondï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  * @author aoqiong
  * 
@@ -26,7 +26,7 @@ public interface SubscriberListener {
 
 
     /**
-     * ½ÓÊÕµ½Ò»´ÎÅäÖÃĞÅÏ¢
+     * ï¿½ï¿½ï¿½Õµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      * 
      * @param configureInfomation
      */

@@ -9,18 +9,6 @@
  */
 package com.taobao.diamond.client.processor;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.taobao.diamond.common.Constants;
 import com.taobao.diamond.configinfo.CacheData;
 import com.taobao.diamond.io.FileSystem;
@@ -30,6 +18,17 @@ import com.taobao.diamond.io.watch.WatchEvent;
 import com.taobao.diamond.io.watch.WatchKey;
 import com.taobao.diamond.io.watch.WatchService;
 import com.taobao.diamond.utils.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 
 public class LocalConfigInfoProcessor {

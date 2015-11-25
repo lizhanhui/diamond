@@ -9,10 +9,11 @@
  */
 package com.taobao.diamond.client;
 
+import com.taobao.diamond.configinfo.CacheData;
+
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import com.taobao.diamond.configinfo.CacheData;
 
 
 /**
@@ -156,4 +157,12 @@ public interface DiamondSubscriber extends DiamondClientSub {
      */
     public String getAvailableConfigureInfomationFromSnapshot(String dataId, String group, long timeout);
 
+    /**
+     * 批量获取配置信息
+     * @param dataIds
+     * @param group
+     * @param timeout
+     * @return
+     */
+    public BatchHttpResult getConfigureInfomationBatch(List<String> dataIds, String group, int timeout);
 }

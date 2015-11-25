@@ -9,16 +9,15 @@
  */
 package com.taobao.diamond.server.utils;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
+import com.taobao.diamond.domain.Page;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 
-import com.taobao.diamond.domain.Page;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 
 /**

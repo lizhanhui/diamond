@@ -9,10 +9,6 @@
  */
 package com.taobao.diamond.utils;
 
-import java.io.File;
-import java.util.Enumeration;
-import java.util.Properties;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Appender;
@@ -20,11 +16,15 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import java.io.File;
+import java.util.Enumeration;
+import java.util.Properties;
+
 
 /**
  * 
  * 
- * logger³õÊ¼»¯£¬°ÑÈÕÖ¾Êä³öµ½Ó¦ÓÃµÄÄ¿Â¼Àï
+ * loggerï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ãµï¿½Ä¿Â¼ï¿½ï¿½
  * 
  */
 public class LoggerInit {
@@ -58,16 +58,16 @@ public class LoggerInit {
         Thread.currentThread().setContextClassLoader(LoggerInit.class.getClassLoader());
 
         try {
-            // Ê¹È±Ê¡µÄÅäÖÃÉúĞ§(Logger, Appender)
+            // Ê¹È±Ê¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§(Logger, Appender)
             PropertyConfigurator.configure(defaultProperties);
 
             /**
-             * ÕÒµ½ÉÏ²ãÓ¦ÓÃÔÚRoot LoggerÉÏÉèÖÃµÄFileAppender£¬ÒÔ¼°HSFÅäÖÃµÄFileAppender¡£
-             * Ä¿µÄÊÇÎªÁËÈÃHSFµÄÈÕÖ¾ÓëÉÏ²ãÓ¦ÓÃµÄÈÕÖ¾Êä³öµ½Í¬Ò»¸öÄ¿Â¼¡£
+             * ï¿½Òµï¿½ï¿½Ï²ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Root Loggerï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½FileAppenderï¿½ï¿½ï¿½Ô¼ï¿½HSFï¿½ï¿½ï¿½Ãµï¿½FileAppenderï¿½ï¿½
+             * Ä¿ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½HSFï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½Ï²ï¿½Ó¦ï¿½Ãµï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½Í¬Ò»ï¿½ï¿½Ä¿Â¼ï¿½ï¿½
              */
             FileAppender bizFileAppender = getFileAppender(Logger.getRootLogger());
             if (null == bizFileAppender) {
-                log.warn("ÉÏ²ãÒµÎñ²ãÃ»ÓĞÔÚROOT LOGGERÉÏÉèÖÃFileAppender!!!");
+                log.warn("ï¿½Ï²ï¿½Òµï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ROOT LOGGERï¿½ï¿½ï¿½ï¿½ï¿½ï¿½FileAppender!!!");
                 bizFileAppender = new FileAppender();
                 bizFileAppender.setFile(System.getProperty("user.home") + "/diamond/logs/diamond_config_data.log");
             }
@@ -89,8 +89,8 @@ public class LoggerInit {
         File newLogFile = new File(bizLogDir, fileAppender.getFile());
 
         fileAppender.setFile(newLogFile.getAbsolutePath());
-        fileAppender.activateOptions(); // ºÜÖØÒª£¬·ñÔòÔ­ÓĞÈÕÖ¾ÄÚÈİ»á±»Çå¿Õ
-        log.warn("³É¹¦Îª" + logName + "Ìí¼ÓAppender. Êä³öÂ·¾¶:" + newLogFile.getAbsolutePath());
+        fileAppender.activateOptions(); // ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½İ»á±»ï¿½ï¿½ï¿½
+        log.warn("ï¿½É¹ï¿½Îª" + logName + "ï¿½ï¿½ï¿½Appender. ï¿½ï¿½ï¿½Â·ï¿½ï¿½:" + newLogFile.getAbsolutePath());
     }
 
 

@@ -9,23 +9,18 @@
  */
 package com.taobao.diamond.sdkapi;
 
+import com.taobao.diamond.domain.*;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import com.taobao.diamond.domain.BatchContextResult;
-import com.taobao.diamond.domain.ConfigInfo;
-import com.taobao.diamond.domain.ConfigInfoEx;
-import com.taobao.diamond.domain.ContextResult;
-import com.taobao.diamond.domain.DiamondSDKConf;
-import com.taobao.diamond.domain.PageContextResult;
-
 /**
- * ¶¨ÒåSDK¶ÔÍâ¿ª·ÅµÄÊý¾Ý·ÃÎÊ½Ó¿Ú
+ * ï¿½ï¿½ï¿½ï¿½SDKï¿½ï¿½ï¿½â¿ªï¿½Åµï¿½ï¿½ï¿½ï¿½Ý·ï¿½ï¿½Ê½Ó¿ï¿½
  * 
  * @filename DiamondSDKManager.java
  * @author libinbin.pt
- * @datetime 2010-7-16 ÏÂÎç04:03:28
+ * @datetime 2010-7-16 ï¿½ï¿½ï¿½ï¿½04:03:28
  * 
  *           {@link #exists(String, String, String)}
  */
@@ -33,43 +28,43 @@ public interface DiamondSDKManager {
 	
 	public Map<String, DiamondSDKConf> getDiamondSDKConfMaps();
 
-	// /////////////////////////////////////////ÍÆËÍÊý¾Ý½Ó¿Ú¶¨Òå////////////////////////////////////////
+	// /////////////////////////////////////////ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½Ó¿Ú¶ï¿½ï¿½ï¿½////////////////////////////////////////
 	/**
-	 * Ê¹ÓÃÖ¸¶¨µÄdiamondÀ´ÍÆËÍÊý¾Ý
+	 * Ê¹ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½diamondï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param dataId
 	 * @param groupName
 	 * @param context
 	 * @param serverId
-	 * @return ContextResult µ¥¸ö¶ÔÏó
+	 * @return ContextResult ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public ContextResult pulish(String dataId, String groupName,
 			String context, String serverId);
 
-	// /////////////////////////////////////////ÍÆËÍÐÞ¸ÄºóµÄÊý¾Ý½Ó¿Ú¶¨Òå////////////////////////////////////////
+	// /////////////////////////////////////////ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Äºï¿½ï¿½ï¿½ï¿½ï¿½Ý½Ó¿Ú¶ï¿½ï¿½ï¿½////////////////////////////////////////
 	/**
-	 * Ê¹ÓÃÖ¸¶¨µÄdiamondÀ´ÍÆËÍÐÞ¸ÄºóµÄÊý¾Ý,ÐÞ¸ÄÇ°ÏÈ¼ì²éÊý¾Ý´æÔÚÐÔ
+	 * Ê¹ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½diamondï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Þ¸ï¿½Ç°ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param dataId
 	 * @param groupName
 	 * @param context
 	 * @param serverId
-	 * @return ContextResult µ¥¸ö¶ÔÏó
+	 * @return ContextResult ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public ContextResult pulishAfterModified(String dataId, String groupName,
 			String context, String serverId);
 
-	// /////////////////////////////////////////Ä£ºý²éÑ¯½Ó¿Ú¶¨Òå////////////////////////////////////////
+	// /////////////////////////////////////////Ä£ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½Ó¿Ú¶ï¿½ï¿½ï¿½////////////////////////////////////////
 	/**
-	 * ¸ù¾ÝÖ¸¶¨µÄ dataIdºÍ×éÃûµ½Ö¸¶¨µÄdiamondÉÏ²éÑ¯Êý¾ÝÁÐ±í Èç¹ûÄ£Ê½ÖÐ°üº¬·ûºÅ'*',Ôò»á×Ô¶¯Ìæ»»Îª'%'²¢Ê¹ÓÃ[ like ]Óï¾ä
-	 * Èç¹ûÄ£Ê½ÖÐ²»°üº¬·ûºÅ'*'²¢ÇÒ²»Îª¿Õ´®£¨°üÀ¨" "£©,ÔòÊ¹ÓÃ[ = ]Óï¾ä
+	 * ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ dataIdï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½diamondï¿½Ï²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½Ä£Ê½ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'*',ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½æ»»Îª'%'ï¿½ï¿½Ê¹ï¿½ï¿½[ like ]ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½Ä£Ê½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'*'ï¿½ï¿½ï¿½Ò²ï¿½Îªï¿½Õ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" "ï¿½ï¿½,ï¿½ï¿½Ê¹ï¿½ï¿½[ = ]ï¿½ï¿½ï¿½
 	 * 
 	 * @param dataIdPattern
 	 * @param groupNamePattern
 	 * @param serverId
 	 * @param currentPage
 	 * @param sizeOfPerPage
-	 * @return PageContextResult<ConfigInfo> µ¥¸ö¶ÔÏó
+	 * @return PageContextResult<ConfigInfo> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @throws SQLException
 	 */
 	public PageContextResult<ConfigInfo> queryBy(String dataIdPattern,
@@ -77,8 +72,8 @@ public interface DiamondSDKManager {
 			long sizeOfPerPage);
 
 	/**
-	 * ¸ù¾ÝÖ¸¶¨µÄ dataId,×éÃûºÍcontentµ½Ö¸¶¨ÅäÖÃµÄdiamondÀ´²éÑ¯Êý¾ÝÁÐ±í Èç¹ûÄ£Ê½ÖÐ°üº¬·ûºÅ'*',Ôò»á×Ô¶¯Ìæ»»Îª'%'²¢Ê¹ÓÃ[
-	 * like ]Óï¾ä Èç¹ûÄ£Ê½ÖÐ²»°üº¬·ûºÅ'*'²¢ÇÒ²»Îª¿Õ´®£¨°üÀ¨" "£©,ÔòÊ¹ÓÃ[ = ]Óï¾ä
+	 * ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ dataId,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½contentï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½diamondï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½Ä£Ê½ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'*',ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½æ»»Îª'%'ï¿½ï¿½Ê¹ï¿½ï¿½[
+	 * like ]ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä£Ê½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'*'ï¿½ï¿½ï¿½Ò²ï¿½Îªï¿½Õ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" "ï¿½ï¿½,ï¿½ï¿½Ê¹ï¿½ï¿½[ = ]ï¿½ï¿½ï¿½
 	 * 
 	 * @param dataIdPattern
 	 * @param groupNamePattern
@@ -86,39 +81,39 @@ public interface DiamondSDKManager {
 	 * @param serverId
 	 * @param currentPage
 	 * @param sizeOfPerPage
-	 * @return PageContextResult<ConfigInfo> µ¥¸ö¶ÔÏó
+	 * @return PageContextResult<ConfigInfo> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @throws SQLException
 	 */
 	public PageContextResult<ConfigInfo> queryBy(String dataIdPattern,
 			String groupNamePattern, String contentPattern, String serverId,
 			long currentPage, long sizeOfPerPage);
 
-	// /////////////////////////////////////////¾«È·²éÑ¯½Ó¿Ú¶¨Òå////////////////////////////////////////
+	// /////////////////////////////////////////ï¿½ï¿½È·ï¿½ï¿½Ñ¯ï¿½Ó¿Ú¶ï¿½ï¿½ï¿½////////////////////////////////////////
 	/**
-	 * ¸ù¾ÝÖ¸¶¨µÄdataIdºÍ×éÃûµ½Ö¸¶¨µÄdiamondÉÏ²éÑ¯Êý¾ÝÁÐ±í
+	 * ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½dataIdï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½diamondï¿½Ï²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 	 * 
 	 * @param dataId
 	 * @param groupName
 	 * @param serverId
-	 * @return ContextResult µ¥¸ö¶ÔÏó
+	 * @return ContextResult ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @throws SQLException
 	 */
 	public ContextResult queryByDataIdAndGroupName(String dataId,
 			String groupName, String serverId);
 
-	// /////////////////////////////////////////ÒÆ³ýÐÅÏ¢½Ó¿Ú¶¨Òå////////////////////////////////////
+	// /////////////////////////////////////////ï¿½Æ³ï¿½ï¿½ï¿½Ï¢ï¿½Ó¿Ú¶ï¿½ï¿½ï¿½////////////////////////////////////
 	/**
-	 * ÒÆ³ýÌØ¶¨·þÎñÆ÷ÉÏidÖ¸¶¨µÄÅäÖÃÐÅÏ¢
+	 * ï¿½Æ³ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½idÖ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 * 
 	 * @param serverId
 	 * @param id
-	 * @return ContextResult µ¥¸ö¶ÔÏó
+	 * @return ContextResult ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public ContextResult unpublish(String serverId, long id);
 	
 	
 	/**
-     * ÅúÁ¿²éÑ¯
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯
      * 
      * @param groupName
      * @param dataIds
@@ -129,7 +124,7 @@ public interface DiamondSDKManager {
 
 
     /**
-     * ÅúÁ¿ÐÂÔö»ò¸üÐÂ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * 
      * @param serverId
      * @param groupName

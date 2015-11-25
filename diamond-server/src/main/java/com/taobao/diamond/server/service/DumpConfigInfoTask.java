@@ -1,12 +1,11 @@
 package com.taobao.diamond.server.service;
 
-import java.io.IOException;
-
+import com.taobao.diamond.domain.ConfigInfo;
+import com.taobao.diamond.domain.Page;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.taobao.diamond.domain.ConfigInfo;
-import com.taobao.diamond.domain.Page;
+import java.io.IOException;
 
 
 /**

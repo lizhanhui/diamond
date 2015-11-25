@@ -9,11 +9,11 @@
  */
 package com.taobao.diamond.utils;
 
+import com.taobao.diamond.common.Constants;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-
-import com.taobao.diamond.common.Constants;
 
 
 public class FileUtils {
@@ -33,7 +33,7 @@ public class FileUtils {
     public static String getFileName(String path) {
         File file = new File(path);
         if (!file.isFile()) {
-            throw new RuntimeException("´ËÂ·¾¶±í´ïµÄ²»ÊÇÎÄ¼þ");
+            throw new RuntimeException("ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
         }
         return file.getName();
     }
@@ -42,14 +42,14 @@ public class FileUtils {
     public static String getParentDir(String path) {
         File file = new File(path);
         if (!file.isFile()) {
-            throw new RuntimeException("´ËÂ·¾¶±í´ïµÄ²»ÊÇÎÄ¼þ");
+            throw new RuntimeException("ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
         }
         File parent = file.getParentFile();
         if (parent.isDirectory()) {
             return parent.getName();
         }
         else {
-            throw new RuntimeException("¸¸Ä¿Â¼²»ÊÇÄ¿Â¼");
+            throw new RuntimeException("ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½Ä¿Â¼");
         }
     }
 
@@ -57,7 +57,7 @@ public class FileUtils {
     public static String getGrandpaDir(String path) {
         File file = new File(path);
         if (file.isDirectory()) {
-            throw new RuntimeException("´ËÂ·¾¶±í´ïµÄ²»ÊÇÎÄ¼þ");
+            throw new RuntimeException("ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
         }
         File parent = file.getParentFile();
         if (parent.isDirectory()) {
@@ -66,11 +66,11 @@ public class FileUtils {
                 return grandpa.getName();
             }
             else {
-                throw new RuntimeException("×æÄ¿Â¼²»ÊÇÄ¿Â¼");
+                throw new RuntimeException("ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½Ä¿Â¼");
             }
         }
         else {
-            throw new RuntimeException("¸¸Ä¿Â¼²»ÊÇÄ¿Â¼");
+            throw new RuntimeException("ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½Ä¿Â¼");
         }
     }
 
@@ -78,7 +78,7 @@ public class FileUtils {
     public static String getFileContent(String path) throws IOException {
         File tFile = new File(path);
         if (!tFile.isFile()) {
-            throw new RuntimeException("²»ÊÇÎÄ¼þ");
+            throw new RuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
         }
         RandomAccessFile file = new RandomAccessFile(tFile, "r");
         long fileSize = file.length();

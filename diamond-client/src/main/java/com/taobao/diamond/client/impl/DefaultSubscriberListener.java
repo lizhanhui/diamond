@@ -1,5 +1,14 @@
 package com.taobao.diamond.client.impl;
 
+import com.taobao.diamond.client.SubscriberListener;
+import com.taobao.diamond.common.Constants;
+import com.taobao.diamond.configinfo.ConfigureInfomation;
+import com.taobao.diamond.manager.ManagerListener;
+import com.taobao.diamond.utils.LoggerInit;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -7,26 +16,16 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.taobao.diamond.client.SubscriberListener;
-import com.taobao.diamond.common.Constants;
-import com.taobao.diamond.configinfo.ConfigureInfomation;
-import com.taobao.diamond.manager.ManagerListener;
-import com.taobao.diamond.utils.LoggerInit;
-
 
 /**
- * ÒµÎñ¼àÌýÆ÷µÄ¾Û¼¯¡£
+ * Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾Û¼ï¿½ï¿½ï¿½
  * 
  * @author leiwen.zh
  * 
  */
 public class DefaultSubscriberListener implements SubscriberListener {
 
-    // »Øµ÷ÈÕÖ¾µ¥¶À¼ÇÂ¼
+    // ï¿½Øµï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
     private static final Log dataLog = LogFactory.getLog(LoggerInit.LOG_NAME_CONFIG_DATA);
 
     private final ConcurrentMap<String/* dataId + group */, CopyOnWriteArrayList<ManagerListener>/* listeners */> allListeners =
@@ -97,7 +96,7 @@ public class DefaultSubscriberListener implements SubscriberListener {
 
 
     /**
-     * Ìí¼ÓÒ»¸öDataID¶ÔÓ¦µÄManagerListener
+     * ï¿½ï¿½ï¿½Ò»ï¿½ï¿½DataIDï¿½ï¿½Ó¦ï¿½ï¿½ManagerListener
      */
     public void addManagerListener(String dataId, String group, ManagerListener listener) {
         List<ManagerListener> list = new ArrayList<ManagerListener>();
@@ -117,7 +116,7 @@ public class DefaultSubscriberListener implements SubscriberListener {
 
 
     /**
-     * É¾³ýÒ»¸öDataID¶ÔÓ¦µÄËùÓÐµÄManagerListeners
+     * É¾ï¿½ï¿½Ò»ï¿½ï¿½DataIDï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ManagerListeners
      * 
      * @param dataId
      */
@@ -132,7 +131,7 @@ public class DefaultSubscriberListener implements SubscriberListener {
 
 
     /**
-     * Ìí¼ÓÒ»¸öDataID¶ÔÓ¦µÄÒ»Ð©ManagerListener
+     * ï¿½ï¿½ï¿½Ò»ï¿½ï¿½DataIDï¿½ï¿½Ó¦ï¿½ï¿½Ò»Ð©ManagerListener
      * 
      * @param dataId
      * @param addListeners

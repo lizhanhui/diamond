@@ -9,21 +9,20 @@
  */
 package com.taobao.diamond.manager.impl;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.taobao.diamond.client.DiamondConfigure;
 import com.taobao.diamond.client.DiamondSubscriber;
 import com.taobao.diamond.client.impl.DefaultSubscriberListener;
 import com.taobao.diamond.client.impl.DiamondClientFactory;
 import com.taobao.diamond.manager.DiamondManager;
 import com.taobao.diamond.manager.ManagerListener;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Properties;
 
 
 /**
@@ -73,7 +72,6 @@ public class DefaultDiamondManager implements DiamondManager {
      * @param group
      * @param dataId
      * @param managerListenerList
-     * @param clusterType
      */
     public DefaultDiamondManager(String group, String dataId, List<ManagerListener> managerListenerList) {
         this.dataId = dataId;

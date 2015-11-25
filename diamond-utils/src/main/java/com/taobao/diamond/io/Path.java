@@ -9,20 +9,20 @@
  */
 package com.taobao.diamond.io;
 
+import com.taobao.diamond.io.watch.WatchEvent.Kind;
+import com.taobao.diamond.io.watch.WatchKey;
+import com.taobao.diamond.io.watch.WatchService;
+import com.taobao.diamond.io.watch.Watchable;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URI;
 
-import com.taobao.diamond.io.watch.WatchEvent.Kind;
-import com.taobao.diamond.io.watch.WatchKey;
-import com.taobao.diamond.io.watch.WatchService;
-import com.taobao.diamond.io.watch.Watchable;
-
 
 /**
- * File¶ÔÏóµÄ·â×°
+ * Fileï¿½ï¿½ï¿½ï¿½Ä·ï¿½×°
  * 
  * @author boyan
  * @date 2010-5-4

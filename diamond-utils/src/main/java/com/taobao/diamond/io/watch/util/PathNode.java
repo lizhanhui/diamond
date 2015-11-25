@@ -9,14 +9,14 @@
  */
 package com.taobao.diamond.io.watch.util;
 
+import com.taobao.diamond.io.Path;
+
 import java.util.LinkedList;
 import java.util.List;
 
-import com.taobao.diamond.io.Path;
-
 
 /**
- * Ê÷ÐÎÄ¿Â¼½á¹¹µÄ½Úµã£¬»º´ælastModified
+ * ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½á¹¹ï¿½Ä½Úµã£¬ï¿½ï¿½ï¿½ï¿½lastModified
  * 
  * @author boyan
  * 

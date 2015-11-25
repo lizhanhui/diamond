@@ -9,23 +9,17 @@
  */
 package com.taobao.diamond.server.listener;
 
-import java.io.IOException;
+import com.taobao.diamond.server.utils.SessionHolder;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.taobao.diamond.server.utils.SessionHolder;
+import java.io.IOException;
 
 
 /**
- * ÊÚÈ¨ÑéÖ¤
+ * ï¿½ï¿½È¨ï¿½ï¿½Ö¤
  * 
  * @author boyan
  * @date 2010-5-5
@@ -43,7 +37,7 @@ public class AuthorizationFilter implements Filter {
         HttpSession session = httpRequest.getSession();
         SessionHolder.setSession(session);
         try {
-            // ÅÐ¶ÏÊÇ·ñµÇÂ¼£¬Ã»ÓÐ¾ÍÌø×ªµ½µÇÂ¼Ò³Ãæ
+            // ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Â¼ï¿½ï¿½Ã»ï¿½Ð¾ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Â¼Ò³ï¿½ï¿½
             if (session.getAttribute("user") == null)
                 ((HttpServletResponse) response).sendRedirect(httpRequest.getContextPath() + "/jsp/login.jsp");
             else
